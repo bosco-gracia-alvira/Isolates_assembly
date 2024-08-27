@@ -70,51 +70,7 @@ gtdbtk classify_wf \
 FOO
 
 # I copy the results and the genomes back to my computer
-scp -r vetlinux05@pgnsrv043.vu-wien.ac.at:~/Bosco/Isolates_assembly/$POOL/07.GTDB-Tk/output "$GTDBTK"
+scp -r vetlinux05@pgnsrv043.vu-wien.ac.at:~/Bosco/Isolates_assembly/$POOL/07.GTDB-Tk/output/* "$GTDBTK"
 mkdir "$GTDBTK"/Genomes
-scp -r vetlinux05@pgnsrv043.vu-wien.ac.at:~/Bosco/Isolates_assembly/$POOL/Assembled_genomes/*.fasta \
+scp -r vetlinux05@pgnsrv043.vu-wien.ac.at:~/Bosco/Isolates_assembly/$POOL/07.GTDB-Tk/Genomes/*.fasta \
         "$GTDBTK"/Genomes
-
-# #We have finally recovered as many clean isolates as possible. Now I will gather them together and run GTDB-Tk in order to know which reference genome I should use for the scaffolding
-# eval "$(conda shell.bash hook)"
-# conda activate gtdbtk-2.0
-# export GTDBTK_DATA_PATH=/Users/bgracia/PhD_local/db/GTDB/release207
-
-# if [[ ! -d "$LOCAL"/Genomes ]]
-# then
-#     mkdir -p "$LOCAL"/Genomes
-# fi
-
-# for i in $CLEAN;
-# do 
-#         cp "$ASSEMBLY"/Assembled_genomes/${i}.fasta "$LOCAL"/Genomes
-# done
-
-# for i in $DIRTY
-# do 
-#         cp "$CLEANING"/${i}/Profile/SUMMARY_default/bin_by_bin/${i}_*/${i}_*-contigs.fa "$LOCAL"/Genomes
-# done
-
-# for i in $(basename -a "$LOCAL"/Genomes/*fa)
-# do
-#         mv "$LOCAL"/Genomes/${i} "$LOCAL"/Genomes/${i}sta
-# done
-
-# for i in $(basename "$LOCAL"/Genomes/*.fasta | cut -d . -f1)
-# do      
-#         mkdir "$LOCAL"/${i}
-#         cp "$LOCAL"/Genomes/${i}.fasta "$LOCAL"/${i}
-#         gtdbtk classify_wf \
-#                 --genome_dir "$LOCAL"/${i} \
-#                 -x fasta \
-#                 --out_dir "$LOCAL"/${i} \
-#                 --cpus 16
-# done
-
-# cat \
-#     $(
-#     for i in $(basename "$LOCAL"/Genomes/*.fasta | cut -d . -f1)
-#     do 
-#         echo "$LOCAL/${i}/classify/gtdbtk.bac120.summary.tsv";
-#     done
-#     ) | sort -r | uniq -i > "$LOCAL"/summary.tsv

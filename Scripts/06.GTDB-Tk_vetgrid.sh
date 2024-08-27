@@ -70,7 +70,7 @@ gtdbtk classify_wf \
 FOO
 
 # I copy the results and the genomes back to my computer
-scp -r vetlinux05@pgnsrv043.vu-wien.ac.at:~/Bosco/Isolates_assembly/$POOL/07.GTDB-Tk/output "$GTDBTK"
+scp -r vetlinux05@pgnsrv043.vu-wien.ac.at:~/Bosco/Isolates_assembly/$POOL/07.GTDB-Tk/output/* "$GTDBTK"
 mkdir "$GTDBTK"/Genomes
-scp -r vetlinux05@pgnsrv043.vu-wien.ac.at:~/Bosco/Isolates_assembly/$POOL/Assembled_genomes/*.fasta \
+scp -r vetlinux05@pgnsrv043.vu-wien.ac.at:~/Bosco/Isolates_assembly/$POOL/07.GTDB-Tk/Genomes/*.fasta \
         "$GTDBTK"/Genomes

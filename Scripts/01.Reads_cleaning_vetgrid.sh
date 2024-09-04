@@ -95,7 +95,7 @@ then
     done
 fi
 
-for i in $(cut -f2 $METADATA | grep -v "sample")
+for i in $(cut -f3 $METADATA | grep -v "sample")
 do
     #We use bbduk, from bbtools, to trim the reads and remove the Illumina adapters.
     "$TEMP"/bbmap/bbduk.sh \

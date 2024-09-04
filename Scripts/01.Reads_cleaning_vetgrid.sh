@@ -99,7 +99,7 @@ for i in $(cut -f3 $METADATA | grep -v "sample")
 do
     #We use bbduk, from bbtools, to trim the reads and remove the Illumina adapters.
     "$TEMP"/bbmap/bbduk.sh \
-        -Xmx24g \
+        -Xmx24g \   
         in1="$RM/fastq/${i}_1.fq.gz" \
         in2="$RM/fastq/${i}_2.fq.gz" \
         out1="$RM/fastq_wo_adapt/${i}.RmAdp_1.fq.gz" \

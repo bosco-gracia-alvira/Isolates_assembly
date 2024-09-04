@@ -84,11 +84,11 @@ then
         fi
     done < "$METADATA"
 
-elif [[ "$POOL" = "Pool_643" ]]
+elif [[ "$POOL" =~ Pool_6[0-9][0-9] ]]
 then
     # In this pool the raw reads were stored in fastq format. We link them to save space.
     rm "$RM"/fastq/*_?.fq.gz
-    for i in $(cut -f2 $METADATA | grep -v "sample")
+    for i in $(cut -f3 "$METADATA" | grep -v "sample")
     do
         cp "$RAW"/${i}/*_1.fq.gz "$RM"/fastq/${i}_1.fq.gz
         cp "$RAW"/${i}/*_2.fq.gz "$RM"/fastq/${i}_2.fq.gz

@@ -8,9 +8,7 @@
 # Set the paths
 POOL="Pool_$1"
 WORKDIR="/Users/bgracia/PopGen Dropbox/Martin McFly/Bosco/PhD_Dropbox/Isolates_assembly"
-
 ASSEMBLY="$WORKDIR"/"$POOL"/03.Assembly
-CHECKM="$WORKDIR"/"$POOL"/04.CheckM2
 
 ### COMMANDS
 IFS="

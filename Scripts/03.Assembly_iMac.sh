@@ -27,7 +27,7 @@ then
     echo "You, liar! This pool does not exist. Try again."
     exit
 else
-    cd "$WORKDIR/$POOL"
+    cd "$WORKDIR/$POOL" || exit
 fi
 
 
@@ -36,7 +36,7 @@ then
     mkdir -p "$ASSEMBLY"/Assembled_genomes
 fi
 
-for i in $(cut -f2 $METADATA | grep -v "sample")
+for i in $(cut -f3 $METADATA | grep -v "sample")
 do
 
         # Assemble each reads set with SPAdes, my favourite assembler
@@ -61,7 +61,7 @@ conda activate base
 
 rm "$ASSEMBLY"/*.col
 
-for i in $(cut -f2 $METADATA | grep -v "sample")
+for i in $(cut -f3 $METADATA | grep -v "sample")
 do 
     echo "${i}" >> "$ASSEMBLY"/Name.col
     assembly-stats "$ASSEMBLY"/Assembled_genomes/${i}.fasta | grep "N50" >> "$ASSEMBLY"/N50.col

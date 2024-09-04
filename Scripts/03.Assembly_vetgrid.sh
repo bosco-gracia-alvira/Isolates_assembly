@@ -35,7 +35,7 @@ then
     mkdir -p "$ASSEMBLY"/Assembled_genomes
 fi
 
-for i in $(cut -f2 "$METADATA" | grep -v "sample")
+for i in $(cut -f3 "$METADATA" | grep -v "sample")
 do
     # This if statement allows to re-start the script if a sample failed
     if [[ ! -f "$ASSEMBLY"/Assembled_genomes/${i}.fasta ]]

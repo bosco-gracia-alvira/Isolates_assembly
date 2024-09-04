@@ -43,10 +43,11 @@ fi
 if [[ "$POOL" = "Pool_503" ]]
 then
     # In this pool the raw reads were stored in bam format. We have to sort the bam files and convert them to fastq.
-    while IFS=$'\t' read -r pool_name sample _rest
+    while IFS=$'\t' read -r pool_name pool sample _rest
     do
         # Skip the header line
-        if [[ "$pool_name" != "pool_name" ]]; then
+        if [[ "$pool_name" != "pool_name" ]]
+        then
             # Sort the BAM file by read names
             samtools sort -n "$RAW/${pool_name}" |\
             
@@ -57,7 +58,7 @@ then
 
 elif [[ "$POOL" = "Pool_591" ]]
 then
-    while IFS=$'\t' read -r pool_name sample _rest
+    while IFS=$'\t' read -r pool_name pool sample _rest
     do  
         # Skip the header line
         if [[ "$pool_name" != "pool_name" ]] 
@@ -74,11 +75,11 @@ then
         fi
     done < "$METADATA"
 
-elif [[ "$POOL" = "Pool_643" ]]
+elif [[ "$POOL" =~ Pool_6[0-9][0-9] ]]
 then
     # In this pool the raw reads were stored in fastq format. We link them to save space.
     rm "$RM"/fastq/*_?.fq.gz
-    for i in $(cut -f2 $METADATA | grep -v "sample")
+    for i in $(cut -f3 $METADATA | grep -v "sample")
     do
         ln -s "$RAW"/${i}/*_1.fq.gz "$RM"/fastq/${i}_1.fq.gz
         ln -s "$RAW"/${i}/*_2.fq.gz "$RM"/fastq/${i}_2.fq.gz
@@ -87,7 +88,7 @@ then
 fi
 
 # We loop over the samples to clean the reads
-for i in $(cut -f2 $METADATA | grep -v "sample")
+for i in $(cut -f3 $METADATA | grep -v "sample")
 do  
     #We use bbduk, from bbtools, to trim the reads and remove the Illumina adapters.
     bbduk.sh \

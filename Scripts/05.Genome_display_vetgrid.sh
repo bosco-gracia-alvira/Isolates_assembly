@@ -8,9 +8,7 @@
 POOL="Pool_$1"
 GENOME="$2"
 WORKDIR="/Volumes/Data/PopGen Dropbox/Martin McFly/Bosco/PhD_Dropbox/Isolates_assembly"
-
 CLEANING="$WORKDIR"/"$POOL"/05.Genome_cleaning
-METADATA="$WORKDIR"/"$POOL"/metadata.tsv
 
 
 ### COMMANDS

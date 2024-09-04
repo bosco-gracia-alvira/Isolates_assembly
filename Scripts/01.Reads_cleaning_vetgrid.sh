@@ -52,7 +52,7 @@ cp -r "$BBMAP"  "$TEMP"/
 if [[ "$POOL" = "Pool_503" ]]
 then
     # In this pool the raw reads were stored in bam format. We have to sort the bam files and convert them to fastq.
-    while IFS=$'\t' read -r pool_name sample _rest
+    while IFS=$'\t' read -r pool_name pool sample _rest
     do
         # Skip the header line
         if [[ "$pool_name" != "pool_name" ]]
@@ -67,7 +67,7 @@ then
 
 elif [[ "$POOL" = "Pool_591" ]]
 then
-    while IFS=$'\t' read -r pool_name sample _rest
+    while IFS=$'\t' read -r pool_name pool sample _rest
     do  
         # Skip the header line
         if [[ "$pool_name" != "pool_name" ]] 
@@ -99,7 +99,7 @@ for i in $(cut -f3 $METADATA | grep -v "sample")
 do
     #We use bbduk, from bbtools, to trim the reads and remove the Illumina adapters.
     "$TEMP"/bbmap/bbduk.sh \
-        -Xmx24g \   
+        -Xmx24g \
         in1="$RM/fastq/${i}_1.fq.gz" \
         in2="$RM/fastq/${i}_2.fq.gz" \
         out1="$RM/fastq_wo_adapt/${i}.RmAdp_1.fq.gz" \
@@ -122,7 +122,6 @@ do
         "$RM"/fastq_clean/${i}.clean_2.fq.gz \
         -o "$RM"/fastqc_clean
 done
-
 
 if [[ ! -d "$WORKDIR"/"$POOL"/02.Rm_adapters ]]
 then

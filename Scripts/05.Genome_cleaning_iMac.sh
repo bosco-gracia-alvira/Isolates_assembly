@@ -19,10 +19,29 @@ LOCAL="/Users/bgracia/PhD_local/Isolates_assembly/centrifuge"
 IFS="
 "
 
+if [[ -z "$POOL" ]]
+then
+    echo "You need to choose a pool, idiot! "
+    exit
+fi
+
+if [[ ! -d "$WORKDIR"/"$POOL" ]]
+then
+    echo "You, liar! This pool does not exist. Try again."
+    exit
+else
+    cd "$WORKDIR"/"$POOL"
+fi
+
+if [[ ! -d "$CLEANING" ]]
+then
+    mkdir -p "$CLEANING"
+fi
+
 eval "$(conda shell.bash hook)"
 conda activate anvio-7.1
 
-for i in $(cut -f2 $METADATA | grep -v "sample")
+for i in $(cut -f3 $METADATA | grep -v "sample")
 do      
         mkdir "$CLEANING"/${i}
 

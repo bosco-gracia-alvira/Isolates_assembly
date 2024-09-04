@@ -86,7 +86,7 @@ fi
 
 # We align them to the reference file
 
-for i in $(cut -f2 "$METADATA" | grep -v "sample")
+for i in $(cut -f3 "$METADATA" | grep -v "sample")
 do
 
     bwa mem \
@@ -106,7 +106,7 @@ do
             -
 done
 
-for i in $(cut -f2 "$METADATA" | grep -v "sample")
+for i in $(cut -f3 "$METADATA" | grep -v "sample")
 do
     mv "$READS"/${i}.noDro_1.fq.gz "$READS"/${i}.clean_1.fq.gz
     mv "$READS"/${i}.noDro_2.fq.gz "$READS"/${i}.clean_2.fq.gz  

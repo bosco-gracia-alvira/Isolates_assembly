@@ -41,7 +41,7 @@ fi
 eval "$(conda shell.bash hook)"
 conda activate anvio-7.1
 
-for i in $(cut -f3 $METADATA | grep -v "sample")
+for i in $(cut -f3 "$METADATA" | grep -v "sample")
 do      
         mkdir "$CLEANING"/${i}
 
